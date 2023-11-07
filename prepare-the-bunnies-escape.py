@@ -57,6 +57,7 @@ def solution(map):
     path_size = path_finder(map, [[0, 0]])
     if path_size <= min_path_size:
         return path_size
+
     else:
         current_min_path_size = 100
         for i in range(len(map)):
