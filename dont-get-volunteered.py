@@ -35,6 +35,3 @@ def solution(src, dest):
         return 0
     else:
         return count_least_possible_nodes_left([[-1, -1], [x_src, y_src]], x_dest, y_dest)
-
-
-print(solution(0, 0))

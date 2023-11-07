@@ -2,7 +2,6 @@ def solution(m, f):
     m = int(m)
     f = int(f)
     ct = 0
-    # print(m, f, ct)
     while m != 1 or f != 1:
         if (m == f or m % f == 0 or f % m == 0) and m != 1 and f != 1:
             return 'impossible'
@@ -20,8 +19,4 @@ def solution(m, f):
             else:
                 f = f - m
                 ct += 1
-        # print(m, f, ct)
     return str(ct)
-
-
-print(solution('4', '7'))
