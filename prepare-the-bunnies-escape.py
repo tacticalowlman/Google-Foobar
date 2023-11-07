@@ -35,42 +35,70 @@ def path_finder(map, path):
         min_path = 100
         min_path_i = 0
         for i, move in enumerate(unsorted_moves):
-            print("path size", move[0], move[1], min_path_len(map, move[0], move[1]))
-            if min_path_len(map, move[0], move[1]) < min_path:
+            path_len = min_path_len(map, move[0], move[1])
+            print("path size", move[0], move[1], path_len, i)
+            if path_len < min_path:
                 min_path_i = i
+                min_path = path_len
+        print("min is", min_path_i)
         moves.append(unsorted_moves.pop(min_path_i))
     print(moves)
+    time.sleep(0.25)
     for move in moves:
         if move[0] == len(map[0]) - 1 and move[1] == len(map) - 1:
+            print("STOP!")
             return 2
         else:
             path.append([move[0], move[1]])
-            path_size = path_finder(map, path) + 1
-            if path_size < min_path_size:
-                min_path_size = path_size
-    path.pop()
-    return min_path_size
+            path_size = path_finder(map, path)
+            if path_size != 0:
+                return path_size + 1
+            else:
+                continue
+    return 0
 
 
 def solution(map):
     min_path_size = min_path_len(map, 0, 0)
     path_size = path_finder(map, [[0, 0]])
+    print("COUNTER PATH SIZE", path_size)
     if path_size <= min_path_size:
         return path_size
-
     else:
         current_min_path_size = 100
         for i in range(len(map)):
             for k in range(len(map[0])):
                 if map[i][k] == 1:
                     map[i][k] = 0
-                path_size = path_finder(map, [[0, 0]])
-                if path_size <= min_path_size:
-                    return path_size
-                elif path_size < current_min_path_size:
-                    current_min_path_size = path_size
-                map[i][k] = 1
+                    path_size = path_finder(map, [[0, 0]])
+                    if path_size <= min_path_size:
+                        return path_size
+                    elif path_size < current_min_path_size:
+                        current_min_path_size = path_size
+                    map[i][k] = 1
     return current_min_path_size
 
 
-print(solution([[0, 1, 1, 0], [0, 0, 0, 1], [1, 1, 0, 0], [1, 1, 1, 0]]))
+mx = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
+
+
+print(solution(mx))
